@@ -1,0 +1,24 @@
+{
+  "name": "dash-script",
+  "version": "1.0.0",
+  "description": "amazon dash script",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyde2able/DashScript.git"
+  },
+  "keywords": [
+    "Amazon",
+    "DashButton",
+    "Script"
+  ],
+  "author": "pokohide",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyde2able/DashScript/issues"
+  },
+  "homepage": "https://github.com/hyde2able/DashScript#readme"
+}
