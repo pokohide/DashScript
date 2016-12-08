@@ -38,7 +38,6 @@ funcs.prototype = {
   },
   next: function() {
     var func = this.funcs.shift()
-    console.log('next')
     if (func !== undefined) {
       func()
     } else {
@@ -51,9 +50,7 @@ funcs.prototype = {
 new funcs([
   function() {
     console.log('Open Top Page')
-    page.open('https://amazon.co.jp', function(status) {
-      page.render('images/visit.png')
-    })
+    page.open('https://amazon.co.jp', function(status) {})
   },
   function() {
     console.log('Click Signin Button')
@@ -61,7 +58,6 @@ new funcs([
       page.evaluate(function() {
         document.getElementById('nav-link-yourAccount').click()
       })
-      page.render('images/click.png')
     }, 2000)
   },
   function() {
@@ -73,14 +69,12 @@ new funcs([
         document.getElementById('ap_password').value = password
         document.getElementById('signInSubmit').click()
       }, email, password)
-      page.render('images/signined.png')
     }, 2000)
   },
   function() {
     setTimeout(function() {
       page.open(itemUrl, function(status) {
-        //document.getElementById('oneClickBuyButton').click()
-        page.render('images/item.png')
+        document.getElementById('oneClickBuyButton').click()
       })
       setTimeout(function() {
         phantom.exit()
