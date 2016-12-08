@@ -1,6 +1,7 @@
 const fs = require('fs'),
       system = require('system'),
       args = system.args
+var page = require('webpage').create()
 
 class DashScirpt {
   constructor(args) {
@@ -18,20 +19,19 @@ class DashScirpt {
   }
 
   init() {
-    this.page = require('webpage').create()
-    this.page.viewportSize = {width: 1920, height: 1080}
-    this.page.settings.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
-    this.page.settings.javascriptEnabled = true
-    this.page.settings.loadImages = false
+    page.viewportSize = {width: 1920, height: 1080}
+    page.settings.userAgent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
+    page.settings.javascriptEnabled = true
+    page.settings.loadImages = false
     phantom.cookiesEnabled = true
     phantom.javascriptEnabled = true
 
-    this.page.onCallback = (data) => {
+    page.onCallback = (data) => {
       if(data === 'DOMContentLoaded') this.next()
     }
 
-    this.page.onInitialized = () => {
-      this.page.evaluate(() => {
+    page.onInitialized = () => {
+      page.evaluate(() => {
         document.addEventListener('DOMContentLoaded', () => {
           window.callPhantom('DOMContentLoaded')
         }, false)
@@ -42,20 +42,18 @@ class DashScirpt {
   /* STEP1: サイトに訪れる */
   visit() {
     console.log('Open Top Page')
-    const that = this
-    this.page.open('https://amazon.co.jp', (status) => {
-      that.page.render('visit.png')
+    page.open('https://amazon.co.jp', (status) => {
+      page.render('visit.png')
     })
   }
 
   /* STEP:2 ログインボタンをクリック */
   clickSignInButton() {
     console.log('Click Signin Button')
-    const that = this
-    that.page.evaluate(() => {
+    page.evaluate(() => {
       console.log('hoge')
       document.getElementById('nav-link-yourAccount').click()
-      that.page.render('click.png')
+      page.render('click.png')
       phantom.exit()
     })
   }
@@ -104,7 +102,7 @@ class DashScirpt {
     if(this.func !== undefined) {
       this.func()
     } else {
-      this.page.onCallback = function(){}
+      page.onCallback = function(){}
     }    
   }
 }
