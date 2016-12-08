@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/hyde2able/DashScript/issues"
   },
-  "homepage": "https://github.com/hyde2able/DashScript#readme"
+  "homepage": "https://github.com/hyde2able/DashScript#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0"
+  }
 }
